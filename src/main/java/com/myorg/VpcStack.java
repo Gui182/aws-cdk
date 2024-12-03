@@ -1,11 +1,11 @@
 package com.myorg;
 
+import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
-import software.amazon.awscdk.services.ec2.InstanceClass;
-import software.amazon.awscdk.services.ec2.InstanceSize;
-import software.amazon.awscdk.services.ec2.InstanceType;
-import software.amazon.awscdk.services.ec2.NatInstanceProviderV2;
+import software.amazon.awscdk.services.ec2.CfnEIP;
+import software.amazon.awscdk.services.ec2.CfnNatGateway;
+import software.amazon.awscdk.services.ec2.CfnSubnet;
 import software.amazon.awscdk.services.ec2.Vpc;
 import software.constructs.Construct;
 
@@ -22,9 +22,21 @@ public class VpcStack extends Stack {
 
         vpc = Vpc.Builder.create(this, "Vpc01")
                 .maxAzs(3)
-                .natGatewayProvider(NatInstanceProviderV2.Builder.create()
-                        .instanceType(InstanceType.of(InstanceClass.BURSTABLE2, InstanceSize.MICRO))
-                        .build())
+                .natGateways(0)
+                .build();
+
+        CfnSubnet publicSubnet = (CfnSubnet) vpc.getPublicSubnets().get(0).getNode().getDefaultChild();
+
+        CfnEIP eip = CfnEIP.Builder.create(this, "VpcElasticIP").build();
+
+        CfnNatGateway natGateway = CfnNatGateway.Builder.create(this, "VpcNatGateway")
+                .subnetId(publicSubnet.getRef())
+                .allocationId(eip.getAttrAllocationId())
+                .build();
+
+        CfnOutput.Builder.create(this, "NatGatewayId")
+                .value(natGateway.getAttrNatGatewayId())
+                .exportName("NatGatewayId")
                 .build();
     }
 
