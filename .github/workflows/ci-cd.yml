@@ -33,5 +33,5 @@ jobs:
       - name: Persist Tag Name for Later Steps
         run: echo "${{ env.TAG_NAME }}"
 
-      - name: Persist Tag Name on release and test Later Steps
+      - name: Persist Tag Name on release and test Later Steps 1
         run: echo "${{ github.ref_name }}"
