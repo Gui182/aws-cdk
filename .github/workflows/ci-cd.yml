@@ -1,0 +1,31 @@
+name: Deploy Serverless App
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set environment variables
+      - name: Set environment variables
+        run: echo "STAGE=production" >> $GITHUB_ENV
+
+      - name: Set environment variables
+        run: echo $STAGE
+
+      - name: Set environment variables
+        run: echo "${{ $STAGE }}"
+
+      - name: Set environment variables
+        run: echo ${{ secrets.TESTE }}
+
+      - name: Persist Tag Name for Later Steps
+        run: echo "${{ github.ref_name }}"
