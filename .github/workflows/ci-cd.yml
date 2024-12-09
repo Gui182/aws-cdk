@@ -22,10 +22,13 @@ jobs:
         run: echo $STAGE
 
       - name: Set environment variables
-        run: echo "${{ env.STAGE }}"
+        run: echo "usando string é assim ${{ env.STAGE }}"
 
       - name: Set environment variables
         run: echo ${{ secrets.TESTE }}
 
       - name: Persist Tag Name for Later Steps
-        run: echo "${{ github.ref_name }}"
+        run: echo "TAG_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Persist Tag Name for Later Steps
+        run: echo "{{ env.TAG_NAME }}"
