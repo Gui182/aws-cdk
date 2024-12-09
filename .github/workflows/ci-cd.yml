@@ -35,3 +35,6 @@ jobs:
 
       - name: Persist Tag Name on release and test Later Steps 3
         run: echo "${{ github.ref_name }}"
+
+      - name: Persist Tag Name for Later Steps Full REf
+        run: echo "$GITHUB_REF
