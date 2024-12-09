@@ -1,0 +1,40 @@
+name: Deploy Serverless App
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set environment variables
+      - name: Set environment variables
+        run: echo "STAGE=production" >> $GITHUB_ENV
+
+      - name: Set environment variables
+        run: echo $STAGE
+
+      - name: Set environment variables
+        run: echo "usando string é assim ${{ env.STAGE }}"
+
+      - name: Set environment variables
+        run: echo ${{ secrets.TESTE }}
+
+      - name: Persist Tag Name for Later Steps
+        run: echo "TAG_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Persist Tag Name for Later Steps
+        run: echo "${{ env.TAG_NAME }}"
+
+      - name: Persist Tag Name on release and test Later Steps 3
+        run: echo "${{ github.ref_name }}"
+
+      - name: Persist Tag Name for Later Steps Full REf
+        run: echo $GITHUB_REF
