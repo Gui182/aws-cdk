@@ -22,7 +22,7 @@ jobs:
         run: echo $STAGE
 
       - name: Set environment variables
-        run: echo "${{ $STAGE }}"
+        run: echo "${{ env.STAGE }}"
 
       - name: Set environment variables
         run: echo ${{ secrets.TESTE }}
