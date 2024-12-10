@@ -29,9 +29,8 @@ tag:
 
 .PHONY: rollback
 rollback:
-	@if [ -z "$(VERSION)" ]; then echo "VERSION is required. Use: make rollback VERSION=<version>"; exit 1; fi
 	@echo "Rolling back to tag $(VERSION) using git revert..."
-	@git checkout main
+	@git checkout master
 	@git revert --no-commit $(VERSION)..HEAD
 	@git commit -m "Revert changes from tag $(VERSION)"
 	@git tag -f $(VERSION) -m "Reverted to $(VERSION)"
