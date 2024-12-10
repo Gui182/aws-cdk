@@ -15,7 +15,6 @@ help:
 	@echo "  release     - Create a new release and tag it"
 	@echo "  tag VERSION=<version> - Create a specific tag (default: $(NEW_VERSION))"
 	@echo "  rollback VERSION=<version> - Rollback to a specific tag using git revert"
-	@echo "  merge VERSION=<version> - Merge a specific tag into the main branch"
 
 .PHONY: release
 release:
