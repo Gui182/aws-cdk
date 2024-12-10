@@ -25,7 +25,7 @@ release:
 tag:
 	@echo "Creating tag $(VERSION)..."
 	@git tag -f $(VERSION) -m "Release $(VERSION)"
-	@git push origin $(VERSION)
+	@git push -u origin $(VERSION) --force
 
 .PHONY: rollback
 rollback:
